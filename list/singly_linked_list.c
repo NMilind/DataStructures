@@ -11,10 +11,10 @@
  * @param index the index at which to set the value
  * @param value the new pointer value
  */
-static void set(SinglyLinkedList *list, int index, void *value)
+static void set(SinglyLinkedList *list, const size_t index, void *value)
 {
     SinglyLinkedNode *current = &list->head;
-    for (unsigned int i = 0; i <= index; i++) {
+    for (size_t i = 0; i <= index; i++) {
         current = current->next;
     }
     current->data = value;
@@ -26,10 +26,10 @@ static void set(SinglyLinkedList *list, int index, void *value)
  * @param index the index to query
  * @return the pointer at the given index
  */
-static void * get(SinglyLinkedList *list, int index)
+static void * get(SinglyLinkedList *list, const size_t index)
 {
     SinglyLinkedNode *current = &list->head;
-    for (unsigned int i = 0; i <= index; i++) {
+    for (size_t i = 0; i <= index; i++) {
         current = current->next;
     }
     return current->data;
@@ -41,10 +41,10 @@ static void * get(SinglyLinkedList *list, int index)
  * @param index the index at which to add a pointer
  * @param value the pointer to add
  */
-static void add(SinglyLinkedList *list, int index, void *value)
+static void add(SinglyLinkedList *list, const size_t index, void *value)
 {
     SinglyLinkedNode *current = &list->head;
-    for (unsigned int i = 0; i < index; i++) {
+    for (size_t i = 0; i < index; i++) {
         current = current->next;
     }
     SinglyLinkedNode *insert = (SinglyLinkedNode *) malloc(sizeof(SinglyLinkedNode));
@@ -79,10 +79,10 @@ static void addLast(SinglyLinkedList *list, void *value)
  * @param index the index to retrieve the pointer from
  * @return the pointer at the index specified
  */
-static void * remove(SinglyLinkedList *list, int index)
+static void * remove(SinglyLinkedList *list, const size_t index)
 {
     SinglyLinkedNode *current = &list->head;
-    for (unsigned int i = 0; i < index; i++) {
+    for (size_t i = 0; i < index; i++) {
         current = current->next;
     }
     SinglyLinkedNode *insert = current->next;

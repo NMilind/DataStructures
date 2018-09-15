@@ -7,6 +7,8 @@
  * so it is up to the user to check for out-of-bounds exceptions.
  */
 
+#include <stdlib.h>
+
 #ifndef DATA_STRUCTURES_SINGLY_LINKED_LIST
 #define DATA_STRUCTURES_SINGLY_LINKED_LIST
 
@@ -20,17 +22,17 @@ typedef struct singly_linked_node SinglyLinkedNode;
 
 struct singly_linked_list
 {
-    unsigned int size;
+    size_t size;
     SinglyLinkedNode head;
 
-    void (*set) (struct singly_linked_list *list, int index, void *value);
-    void * (*get) (struct singly_linked_list *list, int index);
+    void (*set) (struct singly_linked_list *list, const size_t index, void *value);
+    void * (*get) (struct singly_linked_list *list, const size_t index);
 
-    void (*add) (struct singly_linked_list *list, int index, void *value);
+    void (*add) (struct singly_linked_list *list, const size_t index, void *value);
     void (*addFirst) (struct singly_linked_list *list, void *value);
     void (*addLast) (struct singly_linked_list *list, void *value);
 
-    void * (*remove) (struct singly_linked_list *list, int index);
+    void * (*remove) (struct singly_linked_list *list, const size_t index);
     void * (*removeFirst) (struct singly_linked_list *list);
     void * (*removeLast) (struct singly_linked_list *list);
 };
