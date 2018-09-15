@@ -9,23 +9,25 @@
  * so it is up to the user to check for out-of-bounds exceptions.
  */
 
+#include <stdlib.h>
+
 #ifndef DATA_STRUCTURES_ARRAY_LIST
 #define DATA_STRUCTURES_ARRAY_LIST
 
 struct array_list
 {
-    unsigned int size;
-    unsigned int capacity;
+    size_t size;
+    size_t capacity;
     void **data;
 
-    void (*set) (struct array_list *list, int index, void *value);
-    void * (*get) (struct array_list *list, int index);
+    void (*set) (struct array_list *list, const size_t index, void *value);
+    void * (*get) (struct array_list *list, const size_t index);
 
-    void (*add) (struct array_list *list, int index, void *value);
+    void (*add) (struct array_list *list, const size_t index, void *value);
     void (*addFirst) (struct array_list *list, void *value);
     void (*addLast) (struct array_list *list, void *value);
 
-    void * (*remove) (struct array_list *list, int index);
+    void * (*remove) (struct array_list *list, const size_t index);
     void * (*removeFirst) (struct array_list *list);
     void * (*removeLast) (struct array_list *list);
 };

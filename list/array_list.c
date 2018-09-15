@@ -11,12 +11,12 @@
  * @param list the list to be checked for growth
  * @param potential the potential new size for the list
  */
-static void grow(ArrayList *list, int potential)
+static void grow(ArrayList *list, const size_t potential)
 {
     if (list->capacity == potential) {
         void **temp = calloc(list->capacity * 2, sizeof(void *));
         list->capacity *= 2;
-        for (unsigned int i = 0; i < list->size; i++) {
+        for (size_t i = 0; i < list->size; i++) {
             temp[i] = list->data[i];
         }
         free(list->data);
@@ -34,7 +34,7 @@ static void grow(ArrayList *list, int potential)
  * @param index the index at which to set a value
  * @param value the pointer to be stored
  */
-static void set(ArrayList *list, int index, void *value)
+static void set(ArrayList *list, const size_t index, void *value)
 {
     list->data[index] = value;
 }
@@ -45,7 +45,7 @@ static void set(ArrayList *list, int index, void *value)
  * @param index the index at which to retrieve the pointer
  * @return the pointer at the specified index
  */
-static void * get(ArrayList *list, int index)
+static void * get(ArrayList *list, const size_t index)
 {
     return list->data[index];
 }
@@ -56,11 +56,11 @@ static void * get(ArrayList *list, int index)
  * @param index the index at which to add the pointer
  * @param value the pointer to be added
  */
-static void add(ArrayList *list, int index, void *value)
+static void add(ArrayList *list, const size_t index, void *value)
 {
     grow(list, list->size + 1);
 
-    for (unsigned int i = list->size; i > index; i--) {
+    for (size_t i = list->size; i > index; i--) {
         list->data[i] = list->data[i - 1];
     }
     list->data[index] = value;
@@ -93,10 +93,10 @@ static void addLast(ArrayList *list, void *value)
  * @param index the index at which to remove the pointer
  * @return the pointer that is removed
  */
-static void * remove(ArrayList *list, int index)
+static void * remove(ArrayList *list, const size_t index)
 {
     void *reference = list->data[index];
-    for (unsigned int i = index; i < list->size; i++) {
+    for (size_t i = index; i < list->size; i++) {
         list->data[i] = list->data[i + 1];
     }
     list->size--;
