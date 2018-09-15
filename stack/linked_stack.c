@@ -41,7 +41,7 @@ static void * peek (LinkedStack *stack)
  * @param stack the stack to query
  * @return the size of the stack
  */
-static int size (LinkedStack *stack)
+static size_t size (LinkedStack *stack)
 {
     return stack->list->size;
 }

@@ -41,7 +41,7 @@ static void * peek (ArrayStack *stack)
  * @param stack the stack to query
  * @return the size of the stack
  */
-static int size (ArrayStack *stack)
+static size_t size (ArrayStack *stack)
 {
     return stack->list->size;
 }

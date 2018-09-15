@@ -7,6 +7,7 @@
  * so it is up to the user to check for out-of-bounds exceptions.
  */
 
+#include <stdlib.h>
 #include "../list/array_list.h"
 
 #ifndef DATA_STRUCTURES_ARRAY_STACK
@@ -19,7 +20,7 @@ struct array_stack
     void (*push) (struct array_stack *stack, void *value);
     void * (*pop) (struct array_stack *stack);
     void * (*peek) (struct array_stack *stack);
-    int (*size) (struct array_stack *stack);
+    size_t (*size) (struct array_stack *stack);
 };
 
 typedef struct array_stack ArrayStack;

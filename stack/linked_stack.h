@@ -7,6 +7,7 @@
  * so it is up to the user to check for out-of-bounds exceptions.
  */
 
+#include <stdlib.h>
 #include "../list/doubly_linked_list.h"
 
 #ifndef DATA_STRUCTURES_LINKED_STACK
@@ -19,7 +20,7 @@ struct linked_stack
     void (*push) (struct linked_stack *stack, void *value);
     void * (*pop) (struct linked_stack *stack);
     void * (*peek) (struct linked_stack *stack);
-    int (*size) (struct linked_stack *stack);
+    size_t (*size) (struct linked_stack *stack);
 };
 
 typedef struct linked_stack LinkedStack;
