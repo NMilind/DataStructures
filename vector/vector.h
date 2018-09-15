@@ -17,19 +17,21 @@ struct vector
 {
     ArrayList *list;
 
-    void * (*get) (struct vector *vector, const unsigned int index);
-    void * (*set) (struct vector *vector, const unsigned int index, const void *value);
+    void * (*get) (struct vector *vector, const size_t index);
+    void * (*set) (struct vector *vector, const size_t index, void *value);
 
     void * (*first) (struct vector *vector);
     void * (*last) (struct vector *vector);
 
-    void (*add) (struct vector *vector, const unsigned int index, const void *value);
-    void (*addFirst) (struct vector *vector, const void *value);
-    void (*addLast) (struct vector *vector, const void *value);
+    void (*add) (struct vector *vector, const size_t index, void *value);
+    void (*addFirst) (struct vector *vector, void *value);
+    void (*addLast) (struct vector *vector, void *value);
 
-    void * (*remove) (struct vector *vector, const unsigned int index);
-    void * (*removeFirst) (struct vector *vector);
-    void * (*removeLast) (struct vector *vector);
+    void * (*rem) (struct vector *vector, const size_t index);
+    void * (*remFirst) (struct vector *vector);
+    void * (*remLast) (struct vector *vector);
+
+    size_t (*size) (struct vector *vector);
 };
 
 typedef struct vector Vector;
