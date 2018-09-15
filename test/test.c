@@ -14,6 +14,7 @@
 #include "list/doubly_linked_list_test.h"
 #include "stack/array_stack_test.h"
 #include "stack/linked_stack_test.h"
+#include "vector/vector_test.h"
 
 #define FORMAT(name,id) printf(SEPARATOR); printf(TEST_OUT "+ " name " Tests\n" TEST_RESET); id;  printf(TEST_OUT "+\n" TEST_RESET);
 
@@ -32,6 +33,8 @@ int main()
     FORMAT("Array Stack Tests", array_stack_test_setup());
 
     FORMAT("Linked Stack Tests", linked_stack_test_setup());
+
+    FORMAT("Vector Tests", vector_test_setup());
 
     return EXIT_SUCCESS;
 }

@@ -196,6 +196,8 @@ void VectorConstruct(Vector *vector)
     vector->rem = &rem;
     vector->remFirst = &remFirst;
     vector->remLast = &remLast;
+
+    vector->size = &size;
 }
 
 /**
