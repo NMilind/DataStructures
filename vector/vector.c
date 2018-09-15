@@ -15,7 +15,7 @@
  */
 static void * get(Vector *vector, const unsigned int index)
 {
-    if (index < 0 || index >= vector->list->size) {
+    if (index >= vector->list->size) {
         fprintf(stderr, "Index out of bounds!");
         exit(EXIT_FAILURE);
     }
@@ -25,13 +25,13 @@ static void * get(Vector *vector, const unsigned int index)
 
 static void * set(Vector *vector, const unsigned int index, const void *value)
 {
-    if (index < 0 || index >= vector->list->size) {
+    if (index >= vector->list->size) {
         fprintf(stderr, "Index out of bounds!");
         exit(EXIT_FAILURE);
     }
 
-    void *old = vector->list->get(index);
-    vector->list->set(vector->list, index, value);
+    //void *old = vector->list->get(index);
+    //vector->list->set(vector->list, index, value);
 
 }
 

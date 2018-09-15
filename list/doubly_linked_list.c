@@ -11,18 +11,18 @@
  * @param index the index at which to set the value
  * @param value the new pointer value
  */
-static void set(DoublyLinkedList *list, int index, void *value)
+static void set(DoublyLinkedList *list, const size_t index, void *value)
 {
     if (index > list->size / 2) {
         DoublyLinkedNode *current = &list->tail;
-        for (unsigned int i = list->size; i > index; i--) {
+        for (size_t i = list->size; i > index; i--) {
             current = current->prev;
         }
         current->data = value;
     }
     else {
         DoublyLinkedNode *current = &list->head;
-        for (unsigned int i = 0; i <= index; i++) {
+        for (size_t i = 0; i <= index; i++) {
             current = current->next;
         }
         current->data = value;
@@ -35,18 +35,18 @@ static void set(DoublyLinkedList *list, int index, void *value)
  * @param index the index to query
  * @return the pointer at the given index
  */
-static void * get(DoublyLinkedList *list, int index)
+static void * get(DoublyLinkedList *list, const size_t index)
 {
     if (index > list->size / 2) {
         DoublyLinkedNode *current = &list->tail;
-        for (unsigned int i = list->size; i > index; i--) {
+        for (size_t i = list->size; i > index; i--) {
             current = current->prev;
         }
         return current->data;
     }
     else {
         DoublyLinkedNode *current = &list->head;
-        for (unsigned int i = 0; i <= index; i++) {
+        for (size_t i = 0; i <= index; i++) {
             current = current->next;
         }
         return current->data;
@@ -59,18 +59,18 @@ static void * get(DoublyLinkedList *list, int index)
  * @param index the index at which to add a pointer
  * @param value the pointer to add
  */
-static void add(DoublyLinkedList *list, int index, void *value)
+static void add(DoublyLinkedList *list, const size_t index, void *value)
 {
     DoublyLinkedNode *current = NULL;
     if (index > list->size / 2) {
         current = &list->tail;
-        for (unsigned int i = list->size; i >= index; i--) {
+        for (size_t i = list->size; i >= index; i--) {
             current = current->prev;
         }
     }
     else {
         current = &list->head;
-        for (unsigned int i = 0; i < index; i++) {
+        for (size_t i = 0; i < index; i++) {
             current = current->next;
         }
     }
@@ -108,18 +108,18 @@ static void addLast(DoublyLinkedList *list, void *value)
  * @param index the index to retrieve the pointer from
  * @return the pointer at the index specified
  */
-static void * remove(DoublyLinkedList *list, int index)
+static void * remove(DoublyLinkedList *list, const size_t index)
 {
     DoublyLinkedNode *current = NULL;
     if (index > list->size / 2) {
         current = &list->tail;
-        for (unsigned int i = list->size; i >= index; i--) {
+        for (size_t i = list->size; i >= index; i--) {
             current = current->prev;
         }
     }
     else {
         current = &list->head;
-        for (unsigned int i = 0; i < index; i++) {
+        for (size_t i = 0; i < index; i++) {
             current = current->next;
         }
     }
@@ -189,7 +189,7 @@ void DoublyLinkedListConstruct(DoublyLinkedList *list)
 void DoublyLinkedListDestroy(DoublyLinkedList *list)
 {
     DoublyLinkedNode *current = &list->head;
-    for (unsigned int i = 0; i < list->size; i++) {
+    for (size_t i = 0; i < list->size; i++) {
         DoublyLinkedNode *temp = current->next;
         free(current->next);
         current = temp;
