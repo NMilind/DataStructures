@@ -13,7 +13,7 @@
  */
 static void set(SinglyLinkedList *list, const size_t index, void *value)
 {
-    SinglyLinkedNode *current = &list->head;
+    SinglyLinkedNode *current = list->head;
     for (size_t i = 0; i <= index; i++) {
         current = current->next;
     }
@@ -28,7 +28,7 @@ static void set(SinglyLinkedList *list, const size_t index, void *value)
  */
 static void * get(SinglyLinkedList *list, const size_t index)
 {
-    SinglyLinkedNode *current = &list->head;
+    SinglyLinkedNode *current = list->head;
     for (size_t i = 0; i <= index; i++) {
         current = current->next;
     }
@@ -43,7 +43,7 @@ static void * get(SinglyLinkedList *list, const size_t index)
  */
 static void add(SinglyLinkedList *list, const size_t index, void *value)
 {
-    SinglyLinkedNode *current = &list->head;
+    SinglyLinkedNode *current = list->head;
     for (size_t i = 0; i < index; i++) {
         current = current->next;
     }
@@ -81,14 +81,16 @@ static void addLast(SinglyLinkedList *list, void *value)
  */
 static void * remove(SinglyLinkedList *list, const size_t index)
 {
-    SinglyLinkedNode *current = &list->head;
+    SinglyLinkedNode *current = list->head;
     for (size_t i = 0; i < index; i++) {
         current = current->next;
     }
     SinglyLinkedNode *insert = current->next;
     current->next = current->next->next;
     list->size--;
-    return insert->data;
+    void *data = insert->data;
+    free(insert);
+    return data;
 }
 
 /**
@@ -135,7 +137,8 @@ void SinglyLinkedListConstruct(SinglyLinkedList *list)
     list->removeFirst = &removeFirst;
     list->removeLast = &removeLast;
 
-    list->head = (SinglyLinkedNode) { .next = NULL, .data = NULL };
+    list->head = (SinglyLinkedNode *) malloc(sizeof(SinglyLinkedNode));
+    *(list->head) = (SinglyLinkedNode) { .next = NULL, .data = NULL };
 }
 
 /**
@@ -145,10 +148,11 @@ void SinglyLinkedListConstruct(SinglyLinkedList *list)
  */
 void SinglyLinkedListDestroy(SinglyLinkedList *list)
 {
-    SinglyLinkedNode *current = &list->head;
+    SinglyLinkedNode *current = list->head;
     while (current->next != NULL) {
         SinglyLinkedNode *temp = current->next;
         free(current->next);
         current = temp;
     }
+    free(list->head);
 }

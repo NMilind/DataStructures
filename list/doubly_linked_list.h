@@ -25,8 +25,8 @@ typedef struct doubly_linked_node DoublyLinkedNode;
 struct doubly_linked_list
 {
     size_t size;
-    DoublyLinkedNode head;
-    DoublyLinkedNode tail;
+    DoublyLinkedNode *head;
+    DoublyLinkedNode *tail;
 
     void (*set) (struct doubly_linked_list *list, const size_t index, void *value);
     void * (*get) (struct doubly_linked_list *list, const size_t index);

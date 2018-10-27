@@ -23,7 +23,7 @@ typedef struct singly_linked_node SinglyLinkedNode;
 struct singly_linked_list
 {
     size_t size;
-    SinglyLinkedNode head;
+    SinglyLinkedNode *head;
 
     void (*set) (struct singly_linked_list *list, const size_t index, void *value);
     void * (*get) (struct singly_linked_list *list, const size_t index);

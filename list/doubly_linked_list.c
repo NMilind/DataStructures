@@ -14,14 +14,14 @@
 static void set(DoublyLinkedList *list, const size_t index, void *value)
 {
     if (index > list->size / 2) {
-        DoublyLinkedNode *current = &list->tail;
+        DoublyLinkedNode *current = list->tail;
         for (size_t i = list->size; i > index; i--) {
             current = current->prev;
         }
         current->data = value;
     }
     else {
-        DoublyLinkedNode *current = &list->head;
+        DoublyLinkedNode *current = list->head;
         for (size_t i = 0; i <= index; i++) {
             current = current->next;
         }
@@ -38,14 +38,14 @@ static void set(DoublyLinkedList *list, const size_t index, void *value)
 static void * get(DoublyLinkedList *list, const size_t index)
 {
     if (index > list->size / 2) {
-        DoublyLinkedNode *current = &list->tail;
+        DoublyLinkedNode *current = list->tail;
         for (size_t i = list->size; i > index; i--) {
             current = current->prev;
         }
         return current->data;
     }
     else {
-        DoublyLinkedNode *current = &list->head;
+        DoublyLinkedNode *current = list->head;
         for (size_t i = 0; i <= index; i++) {
             current = current->next;
         }
@@ -63,13 +63,13 @@ static void add(DoublyLinkedList *list, const size_t index, void *value)
 {
     DoublyLinkedNode *current = NULL;
     if (index > list->size / 2) {
-        current = &list->tail;
+        current = list->tail;
         for (size_t i = list->size; i >= index; i--) {
             current = current->prev;
         }
     }
     else {
-        current = &list->head;
+        current = list->head;
         for (size_t i = 0; i < index; i++) {
             current = current->next;
         }
@@ -112,13 +112,13 @@ static void * remove(DoublyLinkedList *list, const size_t index)
 {
     DoublyLinkedNode *current = NULL;
     if (index > list->size / 2) {
-        current = &list->tail;
+        current = list->tail;
         for (size_t i = list->size; i >= index; i--) {
             current = current->prev;
         }
     }
     else {
-        current = &list->head;
+        current = list->head;
         for (size_t i = 0; i < index; i++) {
             current = current->next;
         }
@@ -128,7 +128,9 @@ static void * remove(DoublyLinkedList *list, const size_t index)
     current->next = current->next->next;
     current->next->prev = current;
     list->size--;
-    return insert->data;
+    void *data = insert->data;
+    free(insert);
+    return data;
 }
 
 /**
@@ -175,10 +177,12 @@ void DoublyLinkedListConstruct(DoublyLinkedList *list)
     list->removeFirst = &removeFirst;
     list->removeLast = &removeLast;
 
-    list->head = (DoublyLinkedNode) { .next = NULL, .data = NULL, .prev = NULL };
-    list->tail = (DoublyLinkedNode) { .next = NULL, .data = NULL, .prev = NULL };
-    list->head.next = &list->tail;
-    list->tail.prev = &list->head;
+    list->head = (DoublyLinkedNode *) malloc(sizeof(DoublyLinkedNode));
+    *(list->head) = (DoublyLinkedNode) { .next = NULL, .data = NULL, .prev = NULL };
+    list->tail = (DoublyLinkedNode *) malloc(sizeof(DoublyLinkedNode));
+    *(list->tail) = (DoublyLinkedNode) { .next = NULL, .data = NULL, .prev = NULL };
+    list->head->next = list->tail;
+    list->tail->prev = list->head;
 }
 
 /**
@@ -188,10 +192,11 @@ void DoublyLinkedListConstruct(DoublyLinkedList *list)
  */
 void DoublyLinkedListDestroy(DoublyLinkedList *list)
 {
-    DoublyLinkedNode *current = &list->head;
+    DoublyLinkedNode *current = list->head;
     for (size_t i = 0; i < list->size; i++) {
         DoublyLinkedNode *temp = current->next;
         free(current->next);
         current = temp;
     }
+    free(list->head);
 }
