@@ -36,7 +36,7 @@ struct vector
 
 typedef struct vector Vector;
 
-extern void VectorConstruct(Vector *vector);
+extern Vector *VectorConstruct();
 
 extern void VectorDestroy(Vector *vector);
 

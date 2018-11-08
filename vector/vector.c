@@ -176,10 +176,12 @@ static size_t size(Vector *vector)
 
 /**
  * Construct a new vector
- * @param vector the vector to construct
+ * @return a new vector
  */
-void VectorConstruct(Vector *vector)
+Vector *VectorConstruct()
 {
+    Vector *vector = (Vector *) malloc(sizeof(Vector));
+
     vector->list = (ArrayList *) malloc(sizeof(ArrayList));
     ArrayListConstruct(vector->list);
 
@@ -198,6 +200,8 @@ void VectorConstruct(Vector *vector)
     vector->remLast = &remLast;
 
     vector->size = &size;
+
+    return vector;
 }
 
 /**
