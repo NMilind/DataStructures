@@ -25,7 +25,7 @@ struct linked_stack
 
 typedef struct linked_stack LinkedStack;
 
-extern void LinkedStackConstruct(LinkedStack *stack);
+extern LinkedStack *LinkedStackConstruct();
 
 extern void LinkedStackDestroy(LinkedStack *stack);
 

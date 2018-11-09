@@ -54,8 +54,10 @@ static size_t size (LinkedStack *stack)
  * Constructs a new Array Stack instance.
  * @param stack the stack to be constructed
  */
-void LinkedStackConstruct(LinkedStack *stack)
+LinkedStack *LinkedStackConstruct()
 {
+    LinkedStack *stack = (LinkedStack *)malloc(sizeof(LinkedStack));
+
     stack->list = (DoublyLinkedList *) malloc(sizeof(DoublyLinkedList));
     DoublyLinkedListConstruct(stack->list);
 
@@ -63,6 +65,8 @@ void LinkedStackConstruct(LinkedStack *stack)
     stack->pop = &pop;
     stack->peek = &peek;
     stack->size = &size;
+
+    return stack;
 }
 
 /**
@@ -73,4 +77,5 @@ void LinkedStackDestroy(LinkedStack *stack)
 {
     DoublyLinkedListDestroy(stack->list);
     free(stack->list);
+    free(stack);
 }

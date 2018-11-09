@@ -212,4 +212,5 @@ void VectorDestroy(Vector *vector)
 {
     ArrayListDestroy(vector->list);
     free(vector->list);
+    free(vector);
 }

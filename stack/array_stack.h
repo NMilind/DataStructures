@@ -25,7 +25,7 @@ struct array_stack
 
 typedef struct array_stack ArrayStack;
 
-extern void ArrayStackConstruct(ArrayStack *stack);
+extern ArrayStack *ArrayStackConstruct();
 
 extern void ArrayStackDestroy(ArrayStack *stack);
 

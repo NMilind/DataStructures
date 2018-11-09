@@ -54,8 +54,10 @@ static size_t size (ArrayStack *stack)
  * Constructs a new Array Stack instance.
  * @param stack the stack to be constructed
  */
-void ArrayStackConstruct(ArrayStack *stack)
+ArrayStack *ArrayStackConstruct()
 {
+    ArrayStack *stack = (ArrayStack *)malloc(sizeof(ArrayStack));
+
     stack->list = (ArrayList *) malloc(sizeof(ArrayList));
     ArrayListConstruct(stack->list);
 
@@ -63,6 +65,8 @@ void ArrayStackConstruct(ArrayStack *stack)
     stack->pop = &pop;
     stack->peek = &peek;
     stack->size = &size;
+
+    return stack;
 }
 
 /**
@@ -73,4 +77,5 @@ void ArrayStackDestroy(ArrayStack *stack)
 {
     ArrayListDestroy(stack->list);
     free(stack->list);
+    free(stack);
 }
